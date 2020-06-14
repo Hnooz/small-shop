@@ -8,7 +8,7 @@
        <div class="grid md:grid-cols-3 grid-cols-1 pl-5 mt-12 border-b-2 border-teal-200" >
            <div class="bg-gray-300 border-b-2 border-teal-300 mb-12 mx-16 rounded-lg shadow-2xl" v-for="product in products" :key="product.index"> 
                
-                <div class="pl-5"> 
+                <div class="md:px-5 px-5"> 
                     <img class="h-64 mt-4 rounded-lg w-64" :src="product.photo" alt="no">
                 </div>
                 <div class="border-b-2 border-teal-200 pl-5">
@@ -43,7 +43,7 @@
                 <div class="mx-4 flex items-center justify-between pb-4 pt-3 md:px-16 md:mx-0">
                     <span class=" font-medium text-teal-300">${{cart.price}}</span>
 
-                    <span class="font-medium text-teal-400"> {{subtotal[index]}}</span>
+                    <span class="font-medium text-teal-400"> {{subtotals[index]}}</span>
                     <div class="md:mr-6 flex justify-between">
     
                         <svg @click="increment(cart,index)" class="h-5 w-5 cursor-pointer font-semibold text-xl text-teal-400 hover:text-teal-300 mr-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,7 +54,7 @@
                             {{cart.quantity}}
                         </span>
                         
-                        <svg :hidden="cart.quantity == 0 ? true : false" @click="decrement(cart,index)" class="h-5 w-5 font-semibold text-xl text-teal-400 hover:text-teal-300 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg @click="decrement(cart,index)" class="h-5 w-5 font-semibold text-xl text-teal-400 hover:text-teal-300 ml-1" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                             <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
@@ -79,17 +79,17 @@ export default {
         return {
            
             products:[
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:100, quantity:0}, 
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:200, quantity:0}, 
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:300, quantity:0},
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:400, quantity:0},
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:500, quantity:0},
-                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:600, quantity:0},
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:100, quantity:1}, 
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:200, quantity:1}, 
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:300, quantity:1},
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:400, quantity:1},
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:500, quantity:1},
+                {name:'test', photo:'https://images.unsplash.com/photo-1491637639811-60e2756cc1c7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=369&q=80', price:600, quantity:1},
             ],
              carts:[],
              count:0,
              total:0,
-             subtotal:[],
+             subtotals:[],
         }
     },
 
@@ -97,23 +97,34 @@ export default {
         addToCart(product)
         {
             this.carts.push(product);
+            this.subtotals.push(product.price);
+            this.total = this.total + product.price;
 
         },
 
         increment(cart,index)
         {
             cart.quantity++;
-            this.subtotal[index] = cart.quantity * cart.price;
+            this.subtotals[index] = cart.quantity * cart.price;
             this.total = this.total + cart.price;
             
         },
 
         decrement(cart,index)
         { 
-            this.subtotal[index] = this.subtotal[index] - cart.price;
-            this.total = this.total - cart.price;
             cart.quantity--;
+
+            if (cart.quantity == 0) {
+                this.carts.pop(cart);
+                this.subtotals.pop();
+            }
+            this.subtotals[index] = this.subtotals[index] - cart.price;
+            this.total = this.total - cart.price;
+            
+
+            
         },
+
 
         
     },
