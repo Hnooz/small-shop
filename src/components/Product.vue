@@ -116,13 +116,13 @@ export default {
 
             if (cart.quantity == 0) {
                 this.carts.pop(cart);
-                this.subtotals.pop();
+               this.subtotals.pop();
             }
             this.subtotals[index] = this.subtotals[index] - cart.price;
             this.total = this.total - cart.price;
-            
 
             
+
         },
 
 
