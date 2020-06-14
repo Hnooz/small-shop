@@ -16,11 +16,11 @@
                 </div>
 
                 <div class="border-b-2 border-teal-200">
-                    <h1 class="my-5 font-semibold text-2xl text-teal-400">{{product.name}}</h1>
+                    <h1 class="my-5 font-semibold text-2xl text-teal-400">{{ product.name }}</h1>
                 </div>
 
                 <div class="flex items-center justify-between mt-5">
-                    <span class="font-medium text-teal-300">${{product.price}}</span>
+                    <span class="font-medium text-teal-300">${{ product.price }}</span>
 
                     <div class="rounded-lg hover:bg-teal-800 bg-teal-900">
                         <button @click.once="addToCart(product)" type="button" class="px-2 py-1 font-semibold text-xl text-teal-200 hover:text-white">To Cart</button>
@@ -128,6 +128,7 @@ export default {
                 this.carts.pop(cart);
                 this.subtotals.pop();
             }
+            
             this.subtotals[index] = this.subtotals[index] - cart.price;
             this.total = this.total - cart.price;
         },
