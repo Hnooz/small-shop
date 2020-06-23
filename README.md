@@ -1,4 +1,4 @@
-# twitter-clone
+# Small Shop
 
 ## Project setup
 ```
